@@ -1,8 +1,5 @@
-﻿import { useEffect, useMemo, useState } from "react";
+﻿import { useMemo, useState } from "react";
 import "./App.css";
-import { supabase } from "./supabaseClient";
-import { cargarPerfil, cargarPropuestas, guardarPropuestasModificadas } from "./supabaseStore";
-import LoginScreen from "./LoginScreen";
 
 const roles = {
   integracion: "Coordinación de Integración",
@@ -117,42 +114,12 @@ const inicial = [
 
 function App() {
   const [rol, setRol] = useState("");
-  const [vista, setVista] = useState("menu");
-  const [session, setSession] = useState(null);
-  const [perfil, setPerfil] = useState(null);
-  const [cargandoDb, setCargandoDb] = useState(true);
-  const [items, setItems] = useState([]);
+  const [vista, setVista] = useState("roles");
 
-  useEffect(() => {
-    let activo = true;
-
-    supabase.auth.getSession().then(({ data }) => {
-      if (activo) {
-        setSession(data.session);
-      }
-    });
-
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, nuevaSession) => {
-      setSession(nuevaSession);
-    });
-
-    return () => {
-      activo = false;
-      listener.subscription.unsubscribe();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!session) {
-      setPerfil(null);
-      setRol("");
-      setItems([]);
-      setCargandoDb(false);
-      return;
-    }
-
-    cargarDatosDeSupabase();
-  }, [session]);
+  const [items, setItems] = useState(() => {
+    const guardado = localStorage.getItem("polo_gestion_flujo_integral_v6");
+    return guardado ? JSON.parse(guardado) : inicial;
+  });
 
   const [solicitudForm, setSolicitudForm] = useState(solicitudVacia);
   const [propuestaForm, setPropuestaForm] = useState(propuestaVacia);
@@ -204,65 +171,9 @@ function App() {
     [baseVisible]
   );
 
-  async function iniciarSesion(email, password) {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      throw error;
-    }
-  }
-
-  async function cargarDatosDeSupabase() {
-    setCargandoDb(true);
-
-    try {
-      const perfilData = await cargarPerfil();
-
-      if (!perfilData) {
-        setPerfil(null);
-        setRol("");
-        setItems([]);
-        return;
-      }
-
-      setPerfil(perfilData);
-      setRol(perfilData.role);
-      setVista("menu");
-
-      const propuestas = await cargarPropuestas();
-      setItems(propuestas);
-    } catch (error) {
-      console.error(error);
-      alert("Error Supabase: " + (error.message || JSON.stringify(error)));
-    } finally {
-      setCargandoDb(false);
-    }
-  }
-
-  async function guardar(nuevos) {
-    const anteriores = items;
-
+  function guardar(nuevos) {
     setItems(nuevos);
-
-    const modificados = nuevos.filter((nuevo) => {
-      const anterior = anteriores.find((item) => item.id === nuevo.id);
-      return JSON.stringify(anterior) !== JSON.stringify(nuevo);
-    });
-
-    if (modificados.length === 0) {
-      return;
-    }
-
-    try {
-      await guardarPropuestasModificadas(modificados);
-    } catch (error) {
-      console.error(error);
-      alert("No se pudo guardar en Supabase. Se restauró la información anterior.");
-      setItems(anteriores);
-    }
+    localStorage.setItem("polo_gestion_flujo_integral_v6", JSON.stringify(nuevos));
   }
 
   function seleccionarRol(nuevoRol) {
@@ -270,14 +181,10 @@ function App() {
     setVista("menu");
   }
 
-  async function cambiarRol() {
-    await supabase.auth.signOut();
-    setSession(null);
-    setPerfil(null);
+  function cambiarRol() {
     setRol("");
-    setVista("menu");
+    setVista("roles");
     setSeleccionadoId(null);
-    setItems([]);
   }
 
   function puedeCrearSolicitud() {
@@ -639,41 +546,6 @@ function App() {
     URL.revokeObjectURL(url);
   }
 
-  if (!session) {
-    return <LoginScreen onLogin={iniciarSesion} />;
-  }
-
-  if (cargandoDb) {
-    return (
-      <main className="app">
-        <section className="loginScreen">
-          <div className="loginBox">
-            <p className="eyebrow">Polo Gestión</p>
-            <h1>Cargando</h1>
-            <p>Estamos conectando con la base de datos.</p>
-          </div>
-        </section>
-      </main>
-    );
-  }
-
-  if (!perfil) {
-    return (
-      <main className="app">
-        <section className="loginScreen">
-          <div className="loginBox">
-            <p className="eyebrow">Sin perfil asignado</p>
-            <h1>Usuario sin rol</h1>
-            <p>
-              El usuario existe, pero todavía no tiene rol cargado en la tabla profiles.
-            </p>
-
-            <button onClick={cambiarRol}>Cerrar sesión</button>
-          </div>
-        </section>
-      </main>
-    );
-  }
   if (vista === "roles") {
     return (
       <main className="app">
@@ -721,7 +593,7 @@ function App() {
 
         <div className="currentRole">
           <span>{roles[rol]}</span>
-          <button onClick={cambiarRol}>Cerrar sesión</button>
+          <button onClick={cambiarRol}>Cambiar rol</button>
         </div>
 
         {vista !== "menu" && (
@@ -2194,7 +2066,4 @@ function generarHtmlDocumento(item) {
 </html>`;
 }
 export default App;
-
-
-
 

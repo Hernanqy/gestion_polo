@@ -914,3 +914,51 @@ select option {
     max-height: 160px;
   }
 }
+
+/* LOGIN SUPABASE */
+.loginScreen {
+  min-height: calc(100vh - 44px);
+  display: grid;
+  place-items: center;
+}
+
+.loginBox {
+  width: min(520px, 100%);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 32px;
+  padding: 34px;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(240,196,25,0.16), transparent 35%),
+    linear-gradient(145deg, rgba(19,78,61,0.96), rgba(9,46,36,0.98));
+  box-shadow: 0 24px 70px rgba(0,0,0,0.28);
+}
+
+.loginBox form {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.loginBox button {
+  border: 0;
+  border-radius: 999px;
+  padding: 13px 18px;
+  background: linear-gradient(135deg, #eac16b, #f7d78e);
+  color: #1b261f;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.loginBox button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.loginError {
+  border-radius: 18px;
+  padding: 12px 14px;
+  background: rgba(255, 120, 100, 0.18);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #ffd6ce;
+  font-weight: 800;
+}
