@@ -887,30 +887,3 @@ select option {
     page-break-after: always;
   }
 }
-
-/* AJUSTE DOCUMENTO FINAL: LOGO LA MÁXIMA EN LUGAR DE CÍRCULO */
-.docHeroLeft {
-  display: grid;
-  place-items: center;
-  min-height: 280px;
-  border-radius: 30px;
-  background:
-    radial-gradient(circle at center, rgba(240,196,25,0.12), transparent 58%),
-    linear-gradient(145deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-.docLogo {
-  width: min(100%, 520px);
-  max-height: 220px;
-  object-fit: contain;
-  filter:
-    drop-shadow(0 22px 35px rgba(0, 0, 0, 0.45))
-    drop-shadow(0 0 18px rgba(240, 196, 25, 0.12));
-}
-
-@media (max-width: 760px) {
-  .docLogo {
-    max-height: 160px;
-  }
-}

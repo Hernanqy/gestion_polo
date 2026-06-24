@@ -1581,20 +1581,21 @@ function App() {
           <section className="printSheet">
             <div className="docHero">
               <div className="docHeroLeft">
-                <img
-                  className="docLogo"
-                  src="/logo-la-maxima.png"
-                  alt="La Máxima Polo Educativo y Recreativo"
-                />
+                <div className="docRing">
+                  <div className="docRingCore">
+                    <span>PROPUESTA</span>
+                    <strong>EDUCATIVA</strong>
+                    <small>POLO LA MÁXIMA</small>
+                  </div>
+                </div>
               </div>
 
               <div className="docHeroRight">
-                <p className="docKicker">Propuesta aprobada</p>
+                <p className="docKicker">Documento institucional</p>
                 <h2>{seleccionado.propuesta?.nombre || seleccionado.solicitud.titulo}</h2>
                 <p>
-                  Documento final de actividad vigente. Incluye la propuesta educativa aprobada,
-                  la organización operativa, los insumos necesarios y la información base para
-                  comunicación institucional.
+                  Propuesta aprobada y vigente, con información pedagógica, operativa,
+                  insumos y datos para comunicación institucional.
                 </p>
 
                 <div className="docMetaGrid">
@@ -1622,73 +1623,85 @@ function App() {
             </div>
 
             <div className="docMainGrid">
-              <DocSection number="01" title="Nombre de la actividad" featured>
+              <DocSection number="01" title="Nombre del taller / actividad" featured>
                 <p>{seleccionado.propuesta?.nombre || seleccionado.solicitud.titulo}</p>
               </DocSection>
 
-              <DocSection number="02" title="Responsable / equipo">
-                <p>{seleccionado.propuesta?.responsable || "Sin responsable cargado"}</p>
+              <DocSection number="02" title="Fundamentación">
+                <p>
+                  {seleccionado.solicitud.objetivo ||
+                    "Propuesta educativa orientada a la divulgación, la participación y el aprendizaje significativo."}
+                </p>
               </DocSection>
 
-              <DocSection number="03" title="Público destinatario">
+              <DocSection number="03" title="Objetivos">
+                <p>{seleccionado.propuesta?.objetivo || "Sin objetivo cargado."}</p>
+              </DocSection>
+
+              <DocSection number="04" title="Público">
                 <p>{seleccionado.solicitud.publico || "Sin definir"}</p>
                 <p><b>Edad:</b> {seleccionado.solicitud.edad || "Sin definir"}</p>
                 <p><b>Cupo:</b> {seleccionado.solicitud.cantidad || "Sin definir"}</p>
               </DocSection>
 
-              <DocSection number="04" title="Objetivo de la actividad" wide>
-                <p>{seleccionado.propuesta?.objetivo || "Sin objetivo cargado."}</p>
+              <DocSection number="05" title="Responsables">
+                <p>{seleccionado.propuesta?.responsable || "Sin responsable cargado"}</p>
+                <p><b>Solicita:</b> {seleccionado.solicita || "Sin definir"}</p>
               </DocSection>
 
-              <DocSection number="05" title="Inicio" wide>
+              <DocSection number="06" title="Espacio y duración">
+                <p><b>Espacio:</b> {seleccionado.solicitud.espacio || "Sin definir"}</p>
+                <p><b>Duración:</b> {seleccionado.propuesta?.duracion || "Sin definir"}</p>
+                <p><b>Fecha tentativa:</b> {seleccionado.solicitud.fecha || "Sin definir"}</p>
+              </DocSection>
+
+              <DocSection number="07" title="Secuencia - Inicio" wide>
                 <p>{seleccionado.propuesta?.inicio || "Sin inicio cargado."}</p>
               </DocSection>
 
-              <DocSection number="06" title="Desarrollo" wide>
+              <DocSection number="08" title="Secuencia - Desarrollo" wide>
                 <p>{seleccionado.propuesta?.desarrollo || "Sin desarrollo cargado."}</p>
               </DocSection>
 
-              <DocSection number="07" title="Cierre" wide>
+              <DocSection number="09" title="Secuencia - Cierre" wide>
                 <p>{seleccionado.propuesta?.cierre || "Sin cierre cargado."}</p>
               </DocSection>
 
-              <DocSection number="08" title="Espacio, fecha y duración">
-                <p><b>Espacio:</b> {seleccionado.solicitud.espacio || "Sin definir"}</p>
-                <p><b>Fecha tentativa:</b> {seleccionado.solicitud.fecha || "Sin definir"}</p>
-                <p><b>Duración:</b> {seleccionado.propuesta?.duracion || "Sin definir"}</p>
+              <DocSection number="10" title="Ejes temáticos / criterios">
+                <p>{seleccionado.solicitud.criterios || "Sin criterios cargados."}</p>
               </DocSection>
 
-              <DocSection number="09" title="Materiales de la actividad">
-                <p>{seleccionado.propuesta?.materiales || "Sin materiales cargados."}</p>
+              <DocSection number="11" title="Materiales e insumos necesarios">
+                <p><b>Materiales de la actividad:</b> {seleccionado.propuesta?.materiales || "Sin materiales cargados."}</p>
+                <p><b>Solicitud de insumos:</b> {seleccionado.insumos?.descripcion || "Sin insumos cargados."}</p>
+                <p><b>Responsable del pedido:</b> {seleccionado.insumos?.responsable || "Sin definir"}</p>
               </DocSection>
 
-              <DocSection number="10" title="Solicitud de insumos">
-                <p><b>Pedido:</b> {seleccionado.insumos?.descripcion || "Sin insumos cargados."}</p>
-                <p><b>Responsable:</b> {seleccionado.insumos?.responsable || "Sin definir"}</p>
-                <p><b>Estado:</b> {seleccionado.insumos?.estado || "Sin definir"}</p>
-              </DocSection>
-
-              <DocSection number="11" title="Logística necesaria">
+              <DocSection number="12" title="Logística necesaria">
                 <p>{seleccionado.propuesta?.necesidades || "No se registraron necesidades logísticas."}</p>
               </DocSection>
 
-              <DocSection number="12" title="Inclusión y adaptaciones">
+              <DocSection number="13" title="Inclusión y adaptaciones">
                 <p>{seleccionado.propuesta?.adaptaciones || "Sin adaptaciones cargadas."}</p>
               </DocSection>
 
-              <DocSection number="13" title="Cuestiones a resolver">
+              <DocSection number="14" title="Cuestiones a resolver">
                 <p>{seleccionado.propuesta?.cuestiones || "Sin cuestiones pendientes registradas."}</p>
               </DocSection>
 
-              <DocSection number="14" title="Información para prensa" press>
+              <DocSection number="15" title="Información para prensa" press>
                 <p><b>{seleccionado.prensa?.titulo || "Sin título cargado"}</b></p>
                 <p>{seleccionado.prensa?.texto || "Sin texto informativo cargado."}</p>
+              </DocSection>
+
+              <DocSection number="16" title="Espacios del Polo que participan">
+                <p>{seleccionado.solicitud.espacio || seleccionado.area || "Sin espacio definido"}</p>
               </DocSection>
             </div>
 
             <footer className="docFooter">
               <strong>LA MÁXIMA</strong>
-              <span>Polo Educativo y Recreativo · Propuesta aprobada</span>
+              <span>Polo Educativo y Recreativo · Propuesta de Actividades</span>
             </footer>
           </section>
         </>
@@ -1752,36 +1765,31 @@ function generarDocumento(item) {
 ÁREA
 ${item.area}
 
-PROPUESTA EDUCATIVA APROBADA
+SOLICITUD ORIGINAL
+Título: ${item.solicitud.titulo}
+Solicita: ${item.solicita}
+Público: ${item.solicitud.publico}
+Edad: ${item.solicitud.edad}
+Cantidad estimada: ${item.solicitud.cantidad}
+Fecha tentativa: ${item.solicitud.fecha}
+Espacio: ${item.solicitud.espacio}
+Tipo de propuesta: ${item.solicitud.tipo}
+Objetivo institucional: ${item.solicitud.objetivo}
+Recursos disponibles: ${item.solicitud.recursos}
+Criterios: ${item.solicitud.criterios}
+
+PROPUESTA EDUCATIVA
 Nombre: ${item.propuesta?.nombre || ""}
 Responsable: ${item.propuesta?.responsable || ""}
-Público: ${item.solicitud.publico || ""}
-Edad: ${item.solicitud.edad || ""}
-Cupo: ${item.solicitud.cantidad || ""}
-Espacio: ${item.solicitud.espacio || ""}
-Fecha tentativa: ${item.solicitud.fecha || ""}
-Tipo de propuesta: ${item.solicitud.tipo || ""}
-Duración: ${item.propuesta?.duracion || ""}
-
-OBJETIVO
-${item.propuesta?.objetivo || ""}
-
-SECUENCIA
+Objetivo: ${item.propuesta?.objetivo || ""}
 Inicio: ${item.propuesta?.inicio || ""}
 Desarrollo: ${item.propuesta?.desarrollo || ""}
 Cierre: ${item.propuesta?.cierre || ""}
-
-MATERIALES DE LA ACTIVIDAD
-${item.propuesta?.materiales || ""}
-
-LOGÍSTICA / NECESIDADES
-${item.propuesta?.necesidades || ""}
-
-INCLUSIÓN Y ADAPTACIONES
-${item.propuesta?.adaptaciones || ""}
-
-CUESTIONES A RESOLVER
-${item.propuesta?.cuestiones || ""}
+Materiales: ${item.propuesta?.materiales || ""}
+Duración: ${item.propuesta?.duracion || ""}
+Adaptaciones: ${item.propuesta?.adaptaciones || ""}
+Necesidades: ${item.propuesta?.necesidades || ""}
+Cuestiones a resolver: ${item.propuesta?.cuestiones || ""}
 
 INSUMOS
 Pedido: ${item.insumos?.descripcion || ""}
@@ -1793,6 +1801,7 @@ Título sugerido: ${item.prensa?.titulo || ""}
 Texto informativo: ${item.prensa?.texto || ""}
 Estado: ${item.prensa?.estado || ""}`;
 }
+
 function esc(value) {
   return String(value || "")
     .replaceAll("&", "&amp;")
@@ -1808,7 +1817,6 @@ function generarHtmlDocumento(item) {
   const tipo = esc(item.solicitud.tipo);
   const publico = esc(item.solicitud.publico);
   const duracion = esc(item.propuesta?.duracion || "Sin definir");
-  const logoSrc = `${window.location.origin}/logo-la-maxima.png`;
 
   const section = (number, title, body, extraClass = "") => `
     <article class="docSection ${extraClass}">
@@ -1857,27 +1865,61 @@ function generarHtmlDocumento(item) {
     gap: 30px;
     align-items: center;
     margin-bottom: 26px;
-    min-height: 330px;
+    min-height: 360px;
   }
 
   .docHeroLeft {
     display: grid;
     place-items: center;
-    min-height: 280px;
-    border-radius: 30px;
-    background:
-      radial-gradient(circle at center, rgba(240,196,25,0.12), transparent 58%),
-      linear-gradient(145deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
+  }
+
+  .docRing {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: conic-gradient(from -30deg, #f0c419 0 285deg, #171717 285deg 360deg);
+    display: grid;
+    place-items: center;
+    filter: drop-shadow(0 28px 42px rgba(0,0,0,0.45));
+    position: relative;
+  }
+
+  .docRing::after {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border-radius: 50%;
     border: 1px solid rgba(255,255,255,0.08);
   }
 
-  .docLogo {
-    width: min(100%, 520px);
-    max-height: 220px;
-    object-fit: contain;
-    filter:
-      drop-shadow(0 22px 35px rgba(0,0,0,0.45))
-      drop-shadow(0 0 18px rgba(240,196,25,0.12));
+  .docRingCore {
+    width: 218px;
+    height: 218px;
+    border-radius: 50%;
+    background: radial-gradient(circle at top, #1f1f1f, #080808);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 26px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+  }
+
+  .docRingCore span {
+    color: #f0c419;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+  }
+
+  .docRingCore strong {
+    font-size: 1.65rem;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .docRingCore small {
+    color: rgba(255,255,255,0.66);
+    font-size: 0.78rem;
   }
 
   .docKicker {
@@ -2023,13 +2065,19 @@ function generarHtmlDocumento(item) {
   <section class="printSheet">
     <div class="docHero">
       <div class="docHeroLeft">
-        <img class="docLogo" src="${logoSrc}" alt="La Máxima Polo Educativo y Recreativo" />
+        <div class="docRing">
+          <div class="docRingCore">
+            <span>PROPUESTA</span>
+            <strong>EDUCATIVA</strong>
+            <small>POLO LA MÁXIMA</small>
+          </div>
+        </div>
       </div>
 
       <div class="docHeroRight">
-        <p class="docKicker">Propuesta aprobada</p>
+        <p class="docKicker">Documento institucional</p>
         <h2>${nombre}</h2>
-        <p>Documento final de actividad vigente. Incluye la propuesta educativa aprobada, la organización operativa, los insumos necesarios y la información base para comunicación institucional.</p>
+        <p>Propuesta aprobada y vigente, con información pedagógica, operativa, insumos y datos para comunicación institucional.</p>
 
         <div class="docMetaGrid">
           <div><span>Área</span><strong>${area}</strong></div>
@@ -2041,29 +2089,31 @@ function generarHtmlDocumento(item) {
     </div>
 
     <div class="docMainGrid">
-      ${section("01", "Nombre de la actividad", `<p>${nombre}</p>`, "featured")}
-      ${section("02", "Responsable / equipo", `<p>${esc(item.propuesta?.responsable || "Sin responsable cargado")}</p>`)}
-      ${section("03", "Público destinatario", `<p>${esc(item.solicitud.publico || "Sin definir")}</p><p><b>Edad:</b> ${esc(item.solicitud.edad || "Sin definir")}</p><p><b>Cupo:</b> ${esc(item.solicitud.cantidad || "Sin definir")}</p>`)}
-      ${section("04", "Objetivo de la actividad", `<p>${esc(item.propuesta?.objetivo || "Sin objetivo cargado.")}</p>`, "wide")}
-      ${section("05", "Inicio", `<p>${esc(item.propuesta?.inicio || "Sin inicio cargado.")}</p>`, "wide")}
-      ${section("06", "Desarrollo", `<p>${esc(item.propuesta?.desarrollo || "Sin desarrollo cargado.")}</p>`, "wide")}
-      ${section("07", "Cierre", `<p>${esc(item.propuesta?.cierre || "Sin cierre cargado.")}</p>`, "wide")}
-      ${section("08", "Espacio, fecha y duración", `<p><b>Espacio:</b> ${esc(item.solicitud.espacio || "Sin definir")}</p><p><b>Fecha tentativa:</b> ${esc(item.solicitud.fecha || "Sin definir")}</p><p><b>Duración:</b> ${esc(item.propuesta?.duracion || "Sin definir")}</p>`)}
-      ${section("09", "Materiales de la actividad", `<p>${esc(item.propuesta?.materiales || "Sin materiales cargados.")}</p>`)}
-      ${section("10", "Solicitud de insumos", `<p><b>Pedido:</b> ${esc(item.insumos?.descripcion || "Sin insumos cargados.")}</p><p><b>Responsable:</b> ${esc(item.insumos?.responsable || "Sin definir")}</p><p><b>Estado:</b> ${esc(item.insumos?.estado || "Sin definir")}</p>`)}
-      ${section("11", "Logística necesaria", `<p>${esc(item.propuesta?.necesidades || "No se registraron necesidades logísticas.")}</p>`)}
-      ${section("12", "Inclusión y adaptaciones", `<p>${esc(item.propuesta?.adaptaciones || "Sin adaptaciones cargadas.")}</p>`)}
-      ${section("13", "Cuestiones a resolver", `<p>${esc(item.propuesta?.cuestiones || "Sin cuestiones pendientes registradas.")}</p>`)}
-      ${section("14", "Información para prensa", `<p><b>${esc(item.prensa?.titulo || "Sin título cargado")}</b></p><p>${esc(item.prensa?.texto || "Sin texto informativo cargado.")}</p>`, "press")}
+      ${section("01", "Nombre del taller / actividad", `<p>${nombre}</p>`, "featured")}
+      ${section("02", "Fundamentación", `<p>${esc(item.solicitud.objetivo || "Propuesta educativa orientada a la divulgación, la participación y el aprendizaje significativo.")}</p>`)}
+      ${section("03", "Objetivos", `<p>${esc(item.propuesta?.objetivo || "Sin objetivo cargado.")}</p>`)}
+      ${section("04", "Público", `<p>${esc(item.solicitud.publico || "Sin definir")}</p><p><b>Edad:</b> ${esc(item.solicitud.edad || "Sin definir")}</p><p><b>Cupo:</b> ${esc(item.solicitud.cantidad || "Sin definir")}</p>`)}
+      ${section("05", "Responsables", `<p>${esc(item.propuesta?.responsable || "Sin responsable cargado")}</p><p><b>Solicita:</b> ${esc(item.solicita || "Sin definir")}</p>`)}
+      ${section("06", "Espacio y duración", `<p><b>Espacio:</b> ${esc(item.solicitud.espacio || "Sin definir")}</p><p><b>Duración:</b> ${esc(item.propuesta?.duracion || "Sin definir")}</p><p><b>Fecha tentativa:</b> ${esc(item.solicitud.fecha || "Sin definir")}</p>`)}
+      ${section("07", "Secuencia - Inicio", `<p>${esc(item.propuesta?.inicio || "Sin inicio cargado.")}</p>`, "wide")}
+      ${section("08", "Secuencia - Desarrollo", `<p>${esc(item.propuesta?.desarrollo || "Sin desarrollo cargado.")}</p>`, "wide")}
+      ${section("09", "Secuencia - Cierre", `<p>${esc(item.propuesta?.cierre || "Sin cierre cargado.")}</p>`, "wide")}
+      ${section("10", "Ejes temáticos / criterios", `<p>${esc(item.solicitud.criterios || "Sin criterios cargados.")}</p>`)}
+      ${section("11", "Materiales e insumos necesarios", `<p><b>Materiales:</b> ${esc(item.propuesta?.materiales || "Sin materiales cargados.")}</p><p><b>Solicitud de insumos:</b> ${esc(item.insumos?.descripcion || "Sin insumos cargados.")}</p><p><b>Responsable:</b> ${esc(item.insumos?.responsable || "Sin definir")}</p>`)}
+      ${section("12", "Logística necesaria", `<p>${esc(item.propuesta?.necesidades || "No se registraron necesidades logísticas.")}</p>`)}
+      ${section("13", "Inclusión y adaptaciones", `<p>${esc(item.propuesta?.adaptaciones || "Sin adaptaciones cargadas.")}</p>`)}
+      ${section("14", "Cuestiones a resolver", `<p>${esc(item.propuesta?.cuestiones || "Sin cuestiones pendientes registradas.")}</p>`)}
+      ${section("15", "Información para prensa", `<p><b>${esc(item.prensa?.titulo || "Sin título cargado")}</b></p><p>${esc(item.prensa?.texto || "Sin texto informativo cargado.")}</p>`, "press")}
+      ${section("16", "Espacios del Polo que participan", `<p>${esc(item.solicitud.espacio || item.area || "Sin espacio definido")}</p>`)}
     </div>
 
     <footer class="docFooter">
       <strong>LA MÁXIMA</strong>
-      <span>Polo Educativo y Recreativo · Propuesta aprobada</span>
+      <span>Polo Educativo y Recreativo · Propuesta de Actividades</span>
     </footer>
   </section>
 </body>
 </html>`;
 }
-export default App;
 
+export default App;
